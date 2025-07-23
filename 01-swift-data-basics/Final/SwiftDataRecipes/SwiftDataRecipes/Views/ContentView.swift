@@ -44,8 +44,11 @@ struct ContentView: View {
 }
 
 struct RecipeListView: View {
-  @Query var recipes: [Recipe]
+  
   @Environment(\.modelContext) private var modelContext
+  
+  @Query(sort: \Recipe.name, order: .forward)
+  var recipes: [Recipe]
 
   var body: some View {
     List {
