@@ -33,7 +33,7 @@
 import SwiftUI
 import SwiftData
 
-typealias Recipe = RecipesSchemaV2.Recipe
+//typealias Recipe = RecipesSchemaV1.Recipe
 
 struct ContentView: View {
 

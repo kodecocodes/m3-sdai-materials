@@ -36,10 +36,12 @@ import SwiftData
 struct ContentView: View {
 
   var body: some View {
-    VStack {
-      RecipeListView()
+    NavigationStack {
+      VStack {
+        RecipeListView()
+      }
+      .navigationTitle("Swift Recipes")
     }
-    .navigationTitle("Swift Recipes")      
   }
 }
 
@@ -89,10 +91,8 @@ struct RecipeListView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
-      ContentView()
-        .modelContainer(SampleData.shared.modelContainer)
-    }
+    ContentView()
+      .modelContainer(SampleData.shared.modelContainer)
   }
 }
 

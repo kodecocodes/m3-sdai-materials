@@ -35,11 +35,13 @@ import SwiftData
 
 @Model
 class Recipe: Hashable {
-  @Attribute(.unique)
+//  @Attribute(.unique)
   var name: String
   var summary: String = ""
   var instructions: String = ""
   var plannedDate: Date
+//  @available(iOS 26, *)
+//  var note: String = ""
 
   @Relationship(deleteRule: .cascade)
   var ingredients: [Ingredient] = []

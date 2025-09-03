@@ -33,22 +33,23 @@
 import Foundation
 import SwiftData
 
-//@Model
-//class Recipe {
-//  @Attribute(.unique)
-//  var name: String
-//  var summary: String = ""
-//  var instructions: String = ""
-//
-//  @Relationship(deleteRule: .cascade)
-//  var ingredients: [Ingredient] = []
-//
-//  init(name: String, summary: String = "", instructions: String = "", ingredients: [Ingredient] = []) {
-//    self.name = name
-//    self.summary = summary
-//    self.instructions = instructions
-//    self.ingredients = ingredients
-//  }
+@Model
+class Recipe {
+  //  @Attribute(.unique)
+  var name: String
+  var summary: String = ""
+  var instructions: String = ""
+  
+  @Relationship(deleteRule: .cascade)
+  var ingredients: [Ingredient] = []
+  
+  init(name: String, summary: String = "", instructions: String = "", ingredients: [Ingredient] = []) {
+    self.name = name
+    self.summary = summary
+    self.instructions = instructions
+    self.ingredients = ingredients
+  }
+}
 extension Recipe {
   static let sampleData = [
     Recipe(

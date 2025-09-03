@@ -33,39 +33,11 @@
 import SwiftUI
 import SwiftData
 
-@Model
-class User
-{
-  var name: String
-  
-  init(name: String) {
-    self.name = name
-  }
-}
-
 enum RecipesSchemaV1: VersionedSchema {
   static var versionIdentifier: Schema.Version { Schema.Version(1, 0, 0) }
   static var models: [any PersistentModel.Type] {
     [Recipe.self, Ingredient.self]
   }
-  
-//  @Model
-//  class Recipe: Hashable {
-//    @Attribute(.unique)
-//    var name: String
-//    var summary: String = ""
-//    var instructions: String = ""
-//
-//    @Relationship(deleteRule: .cascade)
-//    var ingredients: [Ingredient] = []
-//
-//    init(name: String, summary: String = "", instructions: String = "", ingredients: [Ingredient] = []) {
-//      self.name = name
-//      self.summary = summary
-//      self.instructions = instructions
-//      self.ingredients = ingredients
-//    }
-//  }
 }
 
 @available(iOS 26, *)
@@ -74,33 +46,13 @@ enum RecipesSchemaV2: VersionedSchema {
 
   static var models: [any PersistentModel.Type] {
     [
-//      Recipe.self,
+      Recipe.self,
       Ingredient.self,
-      User.self,
       BakedGood.self,
-      Beverage.self
+      Beverage.self,
+//      Cookbook.self
     ]
   }
-  
-//  @Model
-//  class Recipe: Hashable {
-//    @Attribute(.unique)
-//    var name: String
-//    var summary: String = ""
-//    var instructions: String = ""
-//    var plannedDate: Date
-//
-//    @Relationship(deleteRule: .cascade)
-//    var ingredients: [Ingredient] = []
-//
-//    init(name: String, summary: String = "", instructions: String = "", ingredients: [Ingredient] = [], plannedDate: Date = Date()) {
-//      self.name = name
-//      self.summary = summary
-//      self.instructions = instructions
-//      self.ingredients = ingredients
-//      self.plannedDate = plannedDate
-//    }
-//  }
 }
 
 enum RecipesMigrationPlan: SchemaMigrationPlan {
@@ -112,17 +64,6 @@ enum RecipesMigrationPlan: SchemaMigrationPlan {
     }
     return currentSchemas
   }
-
-//  @available(iOS 26, *)
-//  static let migrateV1toV2 = MigrationStage.custom(
-//      fromVersion: RecipesSchemaV1.self,
-//      toVersion: RecipesSchemaV2.self,
-//      willMigrate: { context in
-//          print("resolving conflicts...\(context)")
-//      }, didMigrate: {context in
-//        print("migration complete")
-//      }
-//  )
   
   @available(iOS 26, *)
   static let migrateV1toV2 = MigrationStage.lightweight(
@@ -145,11 +86,12 @@ struct AppMain: App {
   let modelContainer: ModelContainer = {
     var container: ModelContainer
     do {
-//      let schema = Schema(versionedSchema: RecipesSchemaV1.self)
-//      let container = try ModelContainer(for: schema)
+      
       let schema = Schema(versionedSchema: RecipesSchemaV2.self)
       let container = try ModelContainer(
         for: schema, migrationPlan: RecipesMigrationPlan.self)
+//      let schema = Schema(versionedSchema: RecipesSchemaV1.self)
+//      container = try ModelContainer(for: schema)
       return container
     } catch {
       fatalError("Could not create ModelContainer: \(error)")
@@ -159,7 +101,6 @@ struct AppMain: App {
   var body: some Scene {
     WindowGroup {
       ContentView(recipeType: .all)
-//        .modelContainer(for: [Recipe.self, Ingredient.self, Beverage.self/*, BakedGood.self*/])
         .modelContainer(modelContainer)
     }
   }

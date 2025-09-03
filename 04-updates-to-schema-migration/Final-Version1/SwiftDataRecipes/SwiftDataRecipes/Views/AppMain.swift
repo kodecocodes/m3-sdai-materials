@@ -39,23 +39,23 @@ enum RecipesSchemaV1: VersionedSchema {
     [Recipe.self, Ingredient.self]
   }
   
-  @Model
-  class Recipe: Hashable {
-    @Attribute(.unique)
-    var name: String
-    var summary: String = ""
-    var instructions: String = ""
-
-    @Relationship(deleteRule: .cascade)
-    var ingredients: [Ingredient] = []
-
-    init(name: String, summary: String = "", instructions: String = "", ingredients: [Ingredient] = []) {
-      self.name = name
-      self.summary = summary
-      self.instructions = instructions
-      self.ingredients = ingredients
-    }
-  }
+//  @Model
+//  class Recipe: Hashable {
+////    @Attribute(.unique)
+//    var name: String
+//    var summary: String = ""
+//    var instructions: String = ""
+//
+//    @Relationship(deleteRule: .cascade)
+//    var ingredients: [Ingredient] = []
+//
+//    init(name: String, summary: String = "", instructions: String = "", ingredients: [Ingredient] = []) {
+//      self.name = name
+//      self.summary = summary
+//      self.instructions = instructions
+//      self.ingredients = ingredients
+//    }
+//  }
 }
 
 @main

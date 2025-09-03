@@ -39,7 +39,7 @@ struct AppMain: App {
   var body: some Scene {
     WindowGroup {
       ContentView()
-        .modelContainer(for: [Recipe.self, Ingredient.self, Cookbook.self])
+        .modelContainer(for: [Recipe.self, Ingredient.self])
     }
   }
 }

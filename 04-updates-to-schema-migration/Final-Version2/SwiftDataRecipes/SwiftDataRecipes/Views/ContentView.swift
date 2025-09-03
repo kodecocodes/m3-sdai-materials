@@ -148,12 +148,12 @@ struct RecipeListView: View {
       for recipe in Recipe.sampleData {
         modelContext.insert(recipe)
       }
-//      for recipe in BakedGood.sampleBakedGoodData {
-//        modelContext.insert(recipe)
-//      }
-//      for recipe in Beverage.sampleBeverageData {
-//        modelContext.insert(recipe)
-//      }
+      for recipe in BakedGood.sampleBakedGoodData {
+        modelContext.insert(recipe)
+      }
+      for recipe in Beverage.sampleBeverageData {
+        modelContext.insert(recipe)
+      }
       
       do {
         try modelContext.save()
@@ -173,12 +173,12 @@ struct RecipeListView: View {
   }
 }
 
-struct ContentView_Previews: PreviewProvider {
-  static var previews: some View {
-    NavigationStack {
-      ContentView(recipeType: .all)
-        .modelContainer(SampleData.shared.modelContainer)
-    }
-  }
-}
+//struct ContentView_Previews: PreviewProvider {
+//  static var previews: some View {
+//    NavigationStack {
+//      ContentView(recipeType: .all)
+//        .modelContainer(SampleData.shared.modelContainer)
+//    }
+//  }
+//}
 

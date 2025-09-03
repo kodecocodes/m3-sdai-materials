@@ -37,6 +37,7 @@ import SwiftData
 @Model
 class BakedGood: Recipe {
   var panSize: PanSize
+  var v2SchemaMarker: Int = 0 // Added to ensure schema uniqueness for V2
   
   init(name: String, summary: String = "", instructions: String = "", ingredients: [Ingredient] = [], panSize: PanSize = .medium) {
     self.panSize = panSize
@@ -241,3 +242,4 @@ class BakedGood: Recipe {
     )
   ]
 }
+

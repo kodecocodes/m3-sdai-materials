@@ -90,20 +90,21 @@ struct ContentView: View {
   
   
   var body: some View {
-
-    VStack {
-      Picker("Recipe Type", selection: $recipeType) {
-        ForEach(RecipeType.allCases) { recipeType in
-          Text(recipeType.rawValue)
-            .tag(recipeType)
+    NavigationStack {
+      VStack {
+        Picker("Recipe Type", selection: $recipeType) {
+          ForEach(RecipeType.allCases) { recipeType in
+            Text(recipeType.rawValue)
+              .tag(recipeType)
+          }
         }
+        .pickerStyle(SegmentedPickerStyle())
+        RecipeListView(predicate: getPredicate(for: recipeType))
       }
-      .pickerStyle(SegmentedPickerStyle())
-      RecipeListView(predicate: getPredicate(for: recipeType))
+      .navigationTitle("Swift Recipes")
+      .searchable(text: $searchString, placement: .automatic, prompt: "Search for a recipe")
+      .autocapitalization(.none)
     }
-    .navigationTitle("Swift Recipes")
-    .searchable(text: $searchString, placement: .automatic, prompt: "Search for a recipe")
-    .autocapitalization(.none)
   }
 }
 
@@ -159,10 +160,8 @@ struct RecipeListView: View {
 
 struct ContentView_Previews: PreviewProvider {
   static var previews: some View {
-    NavigationStack {
-      ContentView(recipeType: .all)
-        .modelContainer(SampleData.shared.modelContainer)
-    }
+    ContentView(recipeType: .all)
+      .modelContainer(SampleData.shared.modelContainer)
   }
 }
 
